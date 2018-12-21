@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% load bootstrap3 widget_tweaks %}
+
+{% block page_title %}Login{% endblock %}
+
+{% block extra_body_class %}login-page{% endblock extra_body_class %}
+
+{% block layout %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a href={% url 'home' %}><b>CoinApp</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">Login with your email and password</p>
+            {% if next %}
+                {% if user.is_authenticated %}
+                    <div class="alert alert-danger alert-dismissable alert-link">
+                        <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+                        Your account doesn't have access to this page. To proceed, please login with an account that has access.
+                    </div>
+                {% else %}
+                    <div class="alert alert-info alert-dismissable alert-link">
+                        <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+                        Please login to see this page.
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            <form action="" method="post">
+                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}" />
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% bootstrap_form_errors form type='non_fields' %}
+                {% bootstrap_javascript jquery=1 %}
+                {% bootstrap_messages %}
+                <div class="form-group has-feedback">
+                    {% render_field form.username class+="form-control" placeholder="Email" required="required" %}
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    {% render_field form.password class+="form-control" placeholder="Password" required="required" %}
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-offset-7 col-xs-5 margin-left margin-bottom">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+                    </div> <!-- /.col -->
+                </div>
+            </form>
+
+            <p class="margin-top"><a href="">Forgot your password?</a></p>
+            <p><a href={% url 'users:signup' %}>Sign Up</a></p>
+        </div> <!-- /.login-box-body -->
+    </div> <!-- /.login-box -->
+{% endblock layout %}

@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% load bootstrap3 widget_tweaks %}
+
+{% block page_title %}Sign Up{% endblock %}
+
+{% block extra_body_class %}login-page{% endblock extra_body_class %}
+
+{% block layout %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a href={% url 'home' %}><b>CoinApp</b></a>
+        </div>
+        {% if messages %}
+        <div class="alert-div-content">
+            {% for message in messages %}
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="alert alert-{{ message.extra_tags }}">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                            </button>
+                            {{ message | safe }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">Sign Up</p>
+            <form action="" method="post">
+                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}" />
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+
+                {% bootstrap_form form %}
+                
+                <div class="row">
+                    <div class="col-xs-offset-7 col-xs-5 margin-left margin-bottom">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    </div> <!--.col -->
+                </div> 
+            </form>
+
+            <p class="margin-top"><a class="margin-top" href={% url 'users:login' %}>Are you sign in?</a></p>
+        </div> <!-- /.login-box-body -->
+    </div> <!-- /.login-box -->
+{% endblock layout %}
