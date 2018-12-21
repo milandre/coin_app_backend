@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block page_title %}{% endblock %} - CoinApp</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Bootstrap -->
+        <link href="{% static 'adminlte/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Font Awesome -->
+        <link href="{% static 'adminlte/plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Select2 -->
+        <link href="{% static 'adminlte/plugins/select2/select2.min.css' %}" rel="stylesheet">
+        <!-- Theme style -->
+        <link href="{% static 'adminlte/css/AdminLTE.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- AdminLTE Skins -->
+        <link href="{% static 'adminlte/css/skins/skin-blue-light.min.css' %}" rel="stylesheet" type="text/css" />
+
+        <link href="{% static 'css/styles.css'%}" rel="stylesheet">
+
+        {% block css %}{% endblock %}
+
+        {% block extracss %}{% endblock %}
+    </head>
+    <body class="skin-blue-light {% block extra_body_class %} layout-top-nav {% endblock extra_body_class %}">
+        {% block layout %}{% endblock layout %}
+
+        <!-- REQUIRED JS SCRIPTS -->
+
+        <!-- jQuery -->
+        <script src="{% static 'adminlte/plugins/jquery/jquery.min.js' %}"></script>
+        <!-- Bootstrap -->
+        <script src="{% static 'adminlte/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+        <!-- AdminLTE App -->
+        <script src="{% static 'adminlte/js/adminlte.min.js' %}"></script>
+
+        <script>$("#copyright-year").text( (new Date).getFullYear() );</script>
+
+        {% block js %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,41 @@
+{% load static %}
+
+<!-- Header Navbar -->
+<nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href={% url "home" %}>CoinApp</a>
+        </div>
+        <div id="navbar-collapse" class="pull-right navbar-brand">
+          {% if user.is_authenticated %}
+          <ul class="nav navbar-nav-row">
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img class="img-circle img-sm" src={% static 'images/users/default.png' %} alt="User Image">
+                  <span class="hidden-xs margin-left">{{ user.first_name }} {{ user.last_name }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li>
+                    <p class="navbar-image-margin-left">{{ user.first_name }}</p> 
+                    <p class="navbar-image-margin-left">{{ user.last_name }}</p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="margin-left">
+                      <a href={% url "users:logout" %}>Logout</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+          </ul>
+          {% else %}
+          <ul class="nav navbar-nav-row">
+            <li class="navbar-margin-right"><a href={% url 'users:signup' %}>Sign Up</a></li>
+
+            <li><a href={% url 'users:login' %}>Login</a></li>
+          </ul>
+          {% endif %}
+        </div><!--/.nav-collapse -->
+       </div>
+</nav><!--/.nav -->

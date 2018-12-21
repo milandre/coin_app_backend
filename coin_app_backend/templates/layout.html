@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block layout %}
+    <!-- Main Header -->
+    <header class="main-header">
+        {% include 'navbar.html' %}
+    </header>
+    <!-- End Main Header -->
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        {% block content_wrapper %}
+            <!-- Main content -->
+            <section class="content">
+                {% block content %}{% endblock content %}
+            </section><!-- /.content -->
+        {% endblock content_wrapper %}
+    </div><!-- /.content-wrapper -->
+    <!-- End Content Wrapper -->
+    <!-- =============================================== -->
+
+    <!-- Main Footer -->
+    {% include 'footer.html' %}
+    <!-- End Main Footer -->
+    <!-- =============================================== -->
+
+{% endblock layout %}

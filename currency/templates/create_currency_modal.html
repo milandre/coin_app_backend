@@ -1,0 +1,36 @@
+{% load bootstrap3 widget_tweaks %}
+
+<div class="modal">
+    <div class="modal-card">
+        <header class="modal-card-head has-text-centered">
+            <h1 style="font-size: 1.3em;" class="modal-card-title">Create Currency</h1>
+        </header>
+        <section class="modal-card-body" style="font-size: 1.2em;">
+            <form id="create-currency-form" action={% url 'api:' %} method="post">
+                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}" />
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% bootstrap_form_errors form type='non_fields' %}
+                {% bootstrap_javascript jquery=1 %}
+                {% bootstrap_messages %}
+
+                {% bootstrap_form form %}
+
+                <div class="row">
+                    <div class="col-xs-offset-7 col-xs-5 margin-left margin-bottom">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Create</button>
+                    </div> <!-- /.col -->
+                </div>
+            </form>
+        </section>            
+    </div>
+</div>
+<script type="text/javascript">
+    $('#create-currency-form').onsubmit(function(){
+        var formData = $(this).serializeArray();
+        var url = "{% url 'api-currency:create-currency' %}";
+        createCurrency(url, formData);
+    })
+</script>
